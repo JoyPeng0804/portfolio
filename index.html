@@ -62,8 +62,8 @@
 @media(max-width:900px){.pet-hero-grid{grid-template-columns:1fr .7fr}.pet-hero h1{font-size:75px}.pet-hero-visual{height:480px}.pet-hero-visual img{height:430px}.pet-section-head{grid-template-columns:180px 1fr}.pet-max{margin-left:0}.pet-screen{height:360px}.pet-screen img{height:340px}.pet-steps{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.pet-header{height:66px}.pet-header nav{gap:13px;font-size:10px}.pet-hero-meta{font-size:9px}.pet-hero-grid{display:flex;flex-direction:column;min-height:0;gap:0}.pet-hero-copy{padding:47px 0 20px}.pet-hero h1{font-size:71px;margin:17px 0 22px}.pet-intro{font-size:14px}.pet-hero-visual{height:385px;width:100%}.pet-hero-visual img{height:360px}.pet-orbit{height:360px;width:360px;bottom:-110px}.pet-orbit-two{height:250px;width:250px;bottom:-40px}.pet-sticker{right:0;top:12px;font-size:12px;padding:14px}.pet-hero-facts{grid-template-columns:1fr 1fr;gap:19px}.pet-hero-facts div:last-child{grid-column:1/-1}.pet-section-nav{justify-content:flex-start;gap:19px}.pet-section{padding:65px 5%}.pet-section-head{display:block;margin-bottom:34px}.pet-section-head>span{display:block;margin-bottom:17px}.pet-section h2{font-size:37px}.pet-two,.pet-screen-grid,.pet-feedback,.pet-reflections,.pet-proto-grid{grid-template-columns:1fr}.pet-two{gap:20px}.pet-two .pet-big{font-size:25px}.pet-steps{gap:10px}.pet-steps article{padding:18px}.pet-steps h3{font-size:16px;margin:14px 0 7px}.pet-steps p{font-size:12px}.pet-screen-grid{gap:42px}.pet-screen{height:410px}.pet-screen img{height:390px}.pet-detail{grid-template-columns:1fr;padding:24px}.pet-detail img{max-height:360px}.pet-board img{max-height:680px}.pet-proto-grid img{max-height:380px;margin:auto}.pet-next{padding:35px 5%;flex-direction:column;align-items:flex-start}.pet-footer{flex-wrap:wrap}.pet-problem{padding:24px}}
 
-.single-page{display:none!important}.single-page#home{display:block!important}body:has(.single-page:target) .single-page,body:has(.single-page [id]:target) .single-page{display:none!important}body:has(.single-page:target) #home,body:has(.single-page [id]:target) #home{display:none!important}body:has(.single-page:target) .single-page:target,body:has(.single-page [id]:target) .single-page:has([id]:target){display:block!important}
-</style></head><body><article id="home" class="single-page" data-route="home" data-title="Joy Peng | 设计作品集">
+.single-page{display:none!important}.single-page.is-active{display:block!important}
+</style></head><body><article id="home" class="single-page is-active" data-route="home" data-title="Joy Peng | 设计作品集">
   
   <header class="wrap">
     <nav class="nav" aria-label="主导航">
@@ -189,6 +189,7 @@ function route(){
  const name=['home','museum','elder','court','petmind'].includes(requested)?requested:'home';
  document.querySelectorAll('video').forEach(v=>v.pause());
  const active=document.querySelector('[data-route="'+name+'"]');
+ document.querySelectorAll('.single-page').forEach(page=>page.classList.toggle('is-active',page===active));
  active.querySelectorAll('[data-src]').forEach(el=>{try{el.src=source(el.dataset.src);el.removeAttribute('data-src');if(el.tagName==='SOURCE')el.parentElement.load();}catch(error){console.error('Media unavailable',error);}});
  active.querySelectorAll('[data-poster]').forEach(el=>{try{el.poster=source(el.dataset.poster);el.removeAttribute('data-poster');}catch(error){console.error('Poster unavailable',error);}});
  document.title=active.dataset.title;
