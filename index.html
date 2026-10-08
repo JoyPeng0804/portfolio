@@ -193,6 +193,24 @@ dialog.is-tall img{max-height:none;width:min(100%,900px)}dialog.is-tall{overflow
   modal?.addEventListener('close',()=>previousFocus?.focus());
 })();
 
+(()=>{
+  if(!document.getElementById('works'))return;
+  const hash=decodeURIComponent(location.hash.slice(1));
+  if(!hash)return;
+  const pages=['fortune-calculator','iga-evaluation','when-to-chat','awl-leather','fortune-fire','fortune-ai','petmind','museum','elder','court','netease'];
+  const page=pages.find(name=>hash===name||hash.startsWith(name+'-'));
+  if(page){
+    const anchor=hash===page?'':hash.slice(page.length+1);
+    location.replace(page+'.html'+(anchor?'#'+anchor:''));
+    return;
+  }
+  const target=hash==='home'?'top':hash.startsWith('home-')?hash.slice(5):null;
+  if(target&&document.getElementById(target)){
+    history.replaceState(null,'','#'+target);
+    document.getElementById(target)?.scrollIntoView();
+  }
+})();
+
 </script>
 </body>
 </html>
